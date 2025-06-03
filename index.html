@@ -133,6 +133,17 @@
   color: #ffbd39;
 }
 
+.horizontal-bullets {
+    display: flex;
+    gap: 40px; /* spacing between items */
+    padding-left: 20px; /* ensures bullets are visible */
+  }
+
+  .horizontal-bullets li {
+    list-style-type: disc; /* or 'disc' for bullet points */
+    display: list-item;
+  }
+
 
 
 
@@ -350,16 +361,23 @@
 						<span class="date">2023-Present</span>
 						<h2>Software Developer in C++</h2>
 						<span class="position">Finsol Technoloies, Noida</span>
-						<p class="mt-4">Finsol, a fintech firm specializing in low-latency trading systems for financial exchanges. 
+						<p class="mt-4">
+							Finsol, a fintech firm specializing in low-latency trading systems for financial exchanges. 
 							<ul>
-								<li>Developed a high-performance multi-exchange trading gateway for order management, market data processing, and DropCopy handling.</li>
-								<li>Engineered an ultra-low-latency order execution system using C++, Boost, Winsock, and Sockets across Windows and Linux environments.</li>
-								<li>Implemented real-time market data processing for exchanges like BSE, NSE, MCX, and IIBX etc, optimizing throughput and reducing latency.</li>
-								<li>Designed and built a DropCopy mechanism to support trade reconciliation and ensure exchange compliance.</li>
-								<li>Integrated RabbitMQ and FIX Protocol to streamline message handling and connectivity with trading infrastructure.</li>
-								<li>Researched and optimized system-level performance through multithreading, memory management, and network communication improvements.</li>
+							  <li>Developed a high-performance multi-exchange trading gateway for order management, market data processing, and DropCopy handling.</li>
+							  <li>Engineered an ultra-low-latency order execution system using C++, Boost, Winsock, and Sockets across Windows and Linux environments.</li>
+							  <li>Implemented real-time market data processing for exchanges like BSE, NSE, MCX, and IIBX etc, optimizing throughput and reducing latency.</li>
+							  <li>Designed and built a DropCopy mechanism to support trade reconciliation and ensure exchange compliance.</li>
+							  <li>Integrated RabbitMQ and FIX Protocol to streamline message handling and connectivity with trading infrastructure.</li>
+							  <li>Researched and optimized system-level performance through multithreading, memory management, and network communication improvements.</li>
+							  <li>Implemented end-to-end encryption using TLS and AES-256 for secure data transmission and storage across trading components.</li>
+							  <li>Worked with multiple communication protocols including FIX (4.2/4.4), Binary Protocols, and proprietary exchange APIs to ensure seamless integration with diverse trading venues.</li>
+							  <li>Designed and maintained modules to manage and normalize high-frequency trading (HFT) market data feeds, handling millions of ticks per second with minimal latency.</li>
+							  <li>Integrated secure key management and validation mechanisms for encryption modules in compliance with industry regulations.</li>
+							  <li>Optimized message parsing and encoding for low-latency processing of FIX, ITCH, and proprietary binary messages in real time.</li>
 							</ul>
-						</p>
+						  </p>
+						  
 						
 					</div>
 
@@ -478,6 +496,24 @@
           </div>
         </div>
 
+		<div class="col-md-0 heading-section">
+			<h5 style="color: #ffbd39;">Worked with Exchanges</h5>
+			<ul class="horizontal-bullets">
+			  <li>BSE</li>
+			  <li>NSE</li>
+			  <li>MCX</li>
+			  <li>IIBX</li>
+			  <li>SGX</li>
+			  <li>UGX</li>
+			</ul>
+			<br>
+		</div>
+
+		<div class="col-md-0 heading-section">
+			<h5 style="color: #ffbd39;">Some project link on GitHub</h5>
+			<br>
+		</div>
+
         <div class="row d-flex">
           <div class="col-md-4 d-flex ftco-animate">
           	<div class="blog-entry justify-content-end">
@@ -540,6 +576,7 @@
 			</div> -->
 		 </div>
 	  </div>
+	  
     </section>
 
 	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
