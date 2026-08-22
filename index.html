@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +22,35 @@
     --blue:#5B8DEF;
     --up:#35D48C;
     --down:#F2545B;
+    --nav-bg:rgba(11,15,20,0.86);
+    --shadow:0 6px 18px rgba(0,0,0,0.28);
     --radius:10px;
     --maxw:1120px;
     --font-display:'Space Grotesk', sans-serif;
     --font-body:'Inter', sans-serif;
     --font-mono:'JetBrains Mono', monospace;
+  }
+
+  html[data-theme="light"]{
+    --bg:#F6F4EE;
+    --panel:#FFFFFF;
+    --panel-2:#EFEBE1;
+    --border:#DDD6C7;
+    --border-soft:#E8E3D8;
+    --text:#1B1F26;
+    --text-muted:#5B6472;
+    --text-faint:#8A93A0;
+    --amber:#B9791E;
+    --blue:#2F52C4;
+    --up:#1C8F5C;
+    --down:#D13B4C;
+    --nav-bg:rgba(246,244,238,0.86);
+    --shadow:0 6px 18px rgba(27,31,38,0.08);
+  }
+
+  html{transition:none;}
+  body, .panel-bar, .hero-panel, section, header.site-nav{
+    transition:background-color .25s ease, border-color .25s ease, color .25s ease;
   }
 
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -86,7 +110,7 @@
   /* ---------- NAV ---------- */
   header.site-nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
-    background:rgba(11,15,20,0.86);
+    background:var(--nav-bg);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--border-soft);
   }
@@ -102,6 +126,7 @@
   .nav-links{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
   .nav-links a{transition:color .15s;}
   .nav-links a:hover{color:var(--text);}
+  .nav-links a.active{color:var(--amber);}
   .nav-cta{
     font-family:var(--font-mono);font-size:13px;
     border:1px solid var(--border);
@@ -110,7 +135,14 @@
     transition:border-color .15s, background .15s;
   }
   .nav-cta:hover{border-color:var(--amber);background:rgba(227,167,59,0.08);}
-  .nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;width:38px;height:38px;color:var(--text);font-size:18px;cursor:pointer;}
+  .theme-toggle{
+    background:none;border:1px solid var(--border);border-radius:6px;
+    width:38px;height:38px;color:var(--text);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    margin-left:14px;transition:border-color .15s, background .15s, color .15s;
+  }
+  .theme-toggle:hover{border-color:var(--amber);color:var(--amber);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;width:38px;height:38px;color:var(--text);font-size:18px;cursor:pointer;margin-left:10px;}
 
   @media (max-width:800px){
     .nav-links{display:none;}
@@ -121,8 +153,8 @@
   /* ---------- TICKER ---------- */
   .ticker{
     margin-top:64px;
-    border-bottom:1px solid var(--border-soft);
-    background:var(--panel-2);
+    border-bottom:1px solid #171F29;
+    background:#0E141C;
     overflow:hidden;
     white-space:nowrap;
     padding:9px 0;
@@ -138,15 +170,27 @@
   .ticker span.item{
     font-family:var(--font-mono);
     font-size:12.5px;
-    color:var(--text-faint);
+    color:#586373;
     padding:0 22px;
-    border-right:1px solid var(--border-soft);
+    border-right:1px solid #171F29;
   }
-  .ticker span.item b{color:var(--amber);font-weight:500;}
-  .ticker span.item .up{color:var(--up);}
+  .ticker span.item b{color:#E3A73B;font-weight:500;}
+  .ticker span.item .up{color:#35D48C;}
 
   /* ---------- HERO ---------- */
-  .hero{padding-top:72px;padding-bottom:88px;border-top:none;}
+  .hero{
+    padding-top:72px;padding-bottom:88px;border-top:none;
+    position:relative;
+    background-image:radial-gradient(circle, var(--border-soft) 1px, transparent 1px);
+    background-size:26px 26px;
+    background-position:-13px -13px;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 60% 50% at 50% 0%, var(--bg) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:1;}
   .hero-grid{
     display:grid;
     grid-template-columns:1.15fr 0.85fr;
@@ -278,6 +322,9 @@
     width:11px;height:11px;border-radius:50%;
     background:var(--bg);border:2px solid var(--amber);
   }
+  .tl-item.muted::before{border-color:var(--text-faint);}
+  .tl-item.muted .company{color:var(--text-faint);}
+  .tl-item.muted li::before{color:var(--text-faint);}
   .tl-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
   .tl-head h3{font-size:18px;}
   .tl-head .tl-date{font-family:var(--font-mono);font-size:12.5px;color:var(--text-faint);white-space:nowrap;}
@@ -299,15 +346,15 @@
     display:flex;flex-direction:column;
   }
   .pf-mock{
-    background:var(--bg);border:1px solid var(--border-soft);border-radius:8px;
+    background:#0B0F14;border:1px solid #171F29;border-radius:8px;
     overflow:hidden;flex:1;display:flex;flex-direction:column;min-height:220px;
   }
-  .pf-mock .mock-bar{display:flex;gap:6px;padding:9px 12px;border-bottom:1px solid var(--border-soft);}
-  .pf-mock .mock-bar span{width:8px;height:8px;border-radius:50%;background:var(--border);}
-  .pf-mock .mock-body{padding:14px;font-family:var(--font-mono);font-size:11px;color:var(--text-faint);line-height:1.9;flex:1;}
-  .pf-mock .mock-body .k{color:var(--blue);}
-  .pf-mock .mock-body .v{color:var(--amber);}
-  .pf-mock .mock-body .tag-header{color:var(--up);}
+  .pf-mock .mock-bar{display:flex;gap:6px;padding:9px 12px;border-bottom:1px solid #171F29;}
+  .pf-mock .mock-bar span{width:8px;height:8px;border-radius:50%;background:#1E2733;}
+  .pf-mock .mock-body{padding:14px;font-family:var(--font-mono);font-size:11px;color:#586373;line-height:1.9;flex:1;}
+  .pf-mock .mock-body .k{color:#5B8DEF;}
+  .pf-mock .mock-body .v{color:#E3A73B;}
+  .pf-mock .mock-body .tag-header{color:#35D48C;}
   .pf-content{padding:30px 32px;}
   .pf-content .pf-tag{font-family:var(--font-mono);font-size:11.5px;color:var(--amber);margin-bottom:10px;letter-spacing:0.03em;}
   .pf-content h3{font-size:22px;margin-bottom:12px;}
@@ -363,6 +410,18 @@
   footer .foot-links{display:flex;justify-content:center;gap:20px;margin-bottom:14px;font-size:13px;color:var(--text-muted);}
   footer .foot-links a:hover{color:var(--amber);}
 
+  .back-to-top{
+    position:fixed;bottom:26px;right:26px;z-index:90;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--panel);border:1px solid var(--border);color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:var(--shadow);
+    opacity:0;pointer-events:none;transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, border-color .15s;
+  }
+  .back-to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+  .back-to-top:hover{border-color:var(--amber);color:var(--amber);}
+
   @media (max-width:700px){
     section{padding:64px 0;}
     .contact-panel{padding:34px 22px;}
@@ -383,6 +442,10 @@
       <a href="#contact">Contact</a>
     </nav>
     <a href="resume/Amarjeet_Vishwakarma_Resume.pdf" target="_blank" class="nav-cta">Resume ↓</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+    </button>
     <button class="nav-toggle" aria-label="Toggle menu" id="navToggle">☰</button>
   </div>
 </header>
@@ -418,7 +481,7 @@
           <span class="label">whoami</span>
         </div>
         <div class="hero-photo-wrap">
-          <div class="hero-photo"><img src="images/profile.png" alt="Amarjeet Vishwakarma"></div>
+          <div class="hero-photo"><img src="images/profile_pic.jpeg" alt="Amarjeet Vishwakarma"></div>
           <h3>Amarjeet Vishwakarma</h3>
           <p class="role">Software Developer, Finsol Technologies</p>
           <div class="hero-facts">
@@ -549,6 +612,18 @@
             <li><b>Worked</b> on Order Management System (OMS) architecture and full order lifecycle handling across exchange protocols.</li>
           </ul>
         </div>
+        <div class="tl-item muted">
+          <div class="tl-head">
+            <h3>Data Verifier</h3>
+            <span class="tl-date">Dec 2020 — Sep 2022</span>
+          </div>
+          <span class="company">Ocrolus Est Pvt Ltd. · Gurugram &nbsp;·&nbsp; early career, before software development</span>
+          <ul>
+            <li><b>Validated</b> documents using proprietary software tools.</li>
+            <li><b>Processed</b> bank statements, identification cards, and other financial documents with high accuracy.</li>
+            <li><b>Ensured</b> data quality and compliance with verification standards.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -672,6 +747,10 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -692,8 +771,41 @@
     const links = document.querySelector('.nav-links');
     const isOpen = links.style.display === 'flex';
     links.style.display = isOpen ? 'none' : 'flex';
-    links.style.cssText += isOpen ? '' : 'position:absolute;top:64px;left:0;right:0;flex-direction:column;background:#0B0F14;padding:20px 28px;border-bottom:1px solid #1E2733;gap:16px;';
+    links.style.cssText += isOpen ? '' : 'position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--border-soft);gap:16px;';
   });
+
+  // Theme toggle (in-memory only for this session; defaults to dark)
+  const themeToggleBtn = document.getElementById('themeToggle');
+  const iconMoon = document.getElementById('iconMoon');
+  const iconSun = document.getElementById('iconSun');
+  themeToggleBtn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    iconMoon.style.display = isDark ? 'none' : 'block';
+    iconSun.style.display = isDark ? 'block' : 'none';
+  });
+
+  // Active-section highlighting in nav on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinkEls = document.querySelectorAll('.nav-links a[href^="#"]');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinkEls.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => spyObserver.observe(s));
+
+  // Back-to-top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 700);
+  }, { passive: true });
 </script>
 
 </body>
