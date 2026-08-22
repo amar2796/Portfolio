@@ -479,7 +479,7 @@
         <div class="skill-card">
           <div class="sk-label">SYSTEMS & LOW-LATENCY</div>
           <div class="sk-tags">
-            <span>Multithreading</span><span>Lock-free Programming</span><span>Memory Management</span><span>Cache-friendly Design</span><span>Zero-copy Techniques</span><span>Custom Allocators</span>
+            <span>Multithreading</span><span>Lock-free Programming</span><span>Custom SPSC/MPMC Queue Design</span><span>Memory Management</span><span>Cache-friendly Design</span><span>Zero-copy Techniques</span><span>Custom Allocators</span><span>Core-pinned Network Publishers</span>
           </div>
         </div>
         <div class="skill-card">
@@ -533,6 +533,7 @@
           <ul>
             <li><b>Architected</b> a high-performance multi-exchange trading gateway in C++, processing 3M+ trades daily at 99.9% uptime across NSE, BSE, MCX, IIBX, and crypto (ByBit).</li>
             <li><b>Designed</b> an ultra-low-latency order execution system achieving sub-100µs order-to-exchange latency using C++, Boost.Asio, and lock-free queues.</li>
+            <li><b>Built</b> market data handling for both snapshot and tick-by-tick (TBT) feeds across multiple exchanges, reducing dissemination latency by 35% through zero-copy techniques and efficient memory pooling.</li>
             <li><b>Implemented</b> a FIX 4.2/4.4 engine with custom parsers achieving sub-50µs message processing, plus a real-time DropCopy module for trade reconciliation and regulatory compliance.</li>
             <li><b>Cut</b> lock contention 60% with Boost.Lockfree SPSC/MPMC queues, CPU cycles 40% through GDB/Valgrind/perf profiling, and heap allocations 80% via custom memory pooling.</li>
           </ul>
